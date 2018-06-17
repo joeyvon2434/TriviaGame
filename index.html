@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head lang="en-US">
-        <Title>Trivia Game</Title>
-        <meta charset="utf-8">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<head lang="en-US">
+    <Title>Trivia Game</Title>
+    <meta charset="utf-8">
 
-        <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-    </head>
-    <body>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
     <div id="wrapper">
 
 
@@ -35,14 +34,16 @@
 
 
             <!--Questions section of game to fade in when game begins and fade out after all question asked-->
-            <p id="question-text" class="questions">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas ligula vitae lacus egestas feugiat. Proin et ante vulputate, imperdiet arcu at, congue ante. Orci varius natoque penatibus et magnis</p>
+            <div id="timer" class="questions">30</div>
+            <p id="question-text" class="questions">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas ligula vitae lacus egestas feugiat. Proin
+                et ante vulputate, imperdiet arcu at, congue ante. Orci varius natoque penatibus et magnis</p>
             <ul id="answer-list" class="questions">
-               
-               <!--Use javascript to create the divs with answers so the order can be random-->
-            
+
+                <!--Use javascript to create the divs with answers so the order can be random-->
+
             </ul>
-        
-            
+
+
 
 
         </div>
@@ -52,8 +53,8 @@
         </footer>
 
     </div>
-        <script type="text/javascript" src="assets/javascript/app.js"></script>
-    </body>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
 
 
 </html>

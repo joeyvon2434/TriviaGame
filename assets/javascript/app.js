@@ -7,7 +7,7 @@
 var question1 = {
     questionNumber: 1,
     questionText: "What year did Neil Armstrong first set foot on the Moon?",
-    answers: [["1969", "correct"], ["1983", "wrong"], ["1965", "wrong"],["1972", "wrong"]]
+    answers: [["1969", "correct"], ["1983", "wrong"], ["1965", "wrong"], ["1972", "wrong"]]
 }
 
 var question2 = {
@@ -22,56 +22,68 @@ var questionArray = [question1, question2];
 var questionCounter = 0;
 var correctChoices = 0;
 var wrongChoices = 0;
+var intervalId;
+var time = 30;
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-//Begin game click function
-//================================
+    //Begin game click function
+    //================================
 
-    $('#start-button').on('click', function() {
+    $('#start-button').on('click', function () {
         $(".start-screen").fadeOut(500);
         nextQuestion();
     });
 
 
-//Function that prepares the next question
-function nextQuestion() {
-    //set question text
-    $('#question-text').text(questionArray[questionCounter].questionText); 
+    //Function that prepares the next question
+    function nextQuestion() {
+        //set question text
+        $('#question-text').text(questionArray[questionCounter].questionText);
 
-    //set answers ==================
+        //set answers ==================
 
         //Create an array of answers to be shuffled
         var shuffleArray = [];
         shuffleArray = questionArray[questionCounter].answers;
-        
+
 
         //while loop to stop answer creation once all answers are created
         while (shuffleArray.length > 0) {
 
-        //Pull first item from shuffled array
-        var shuffleIndex = Math.floor(Math.random() * shuffleArray.length);
-        var answerCreation = shuffleArray[shuffleIndex];
+            //Pull first item from shuffled array
+            var shuffleIndex = Math.floor(Math.random() * shuffleArray.length);
+            var answerCreation = shuffleArray[shuffleIndex];
+
+
+            //Create a list item for the first answer
+            console.log('index' + shuffleIndex);
+            var newAnswer = $("<div>");
+            newAnswer.text(answerCreation[0]);
+            newAnswer.addClass(answerCreation[1]);
+            newAnswer.addClass('answer')
+            $('#answer-list').append(newAnswer);
+            shuffleArray.splice(shuffleIndex, 1);
+
+        }; //End while loop for answer creation
+
+        //Show question and answers
+        $(".questions").delay(500).fadeIn(500);//Likely change this to a function call that works for all question changes
         
+        //start timer
+        intervalId = setInterval(countDown, 1000);
 
-        //Create a list item for the first answer
-        console.log('index' + shuffleIndex);
-        var newAnswer = $("<div>");
-        newAnswer.text(answerCreation[0]);
-        newAnswer.addClass(answerCreation[1]);
-        newAnswer.addClass('answer')
-        $('#answer-list').append(newAnswer);
-        shuffleArray.splice(shuffleIndex, 1);
-        
-
-        
-    }; //End while loop for answer creation
-
-    //Show question and answers
-    $(".questions").delay(500).fadeIn(500);//Likely change this to a function call that works for all question changes
-    //start timer
+}; //End next question function
 
 
-};
+
+
+
+    //Count Down Function for timer
+    function countDown() {
+        time = time -1;
+        $('#timer').text(time);
+    }
+
 
 }); //document.ready end
