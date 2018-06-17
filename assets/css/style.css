@@ -26,13 +26,22 @@
     border: 1px solid blue;
 }
 
+.questions{
+    display: none;
+}
+
+.answer { /*this class is for the answers created in jquery*/
+    color: red;
+}
+
 footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 8px;
+    margin-top: 20px;
     border-top: 3px solid green;
     font-size: 16px;
 }
