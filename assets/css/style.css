@@ -31,7 +31,17 @@
 }
 
 .answer { /*this class is for the answers created in jquery*/
-    color: red;
+    width: 25%;
+    margin: 10px auto;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+#answer-image {
+    position: relative;
+    display: none;
+    max-width: 40%;
 }
 
 footer {
