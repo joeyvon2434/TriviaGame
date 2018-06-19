@@ -30,10 +30,10 @@ var question3 = {
 
 var question4 = {
     questionNumber: 4,
-    questionText: "What is the name of the man-made spacecraft currently farthest from the Earth?",
+    questionText: "As of June 2018, what is the name of the man-made spacecraft currently farthest from the Earth?",
     answers: [["Voyager 1", "correct"], ["Voyager 2", "wrong"], ["Cassini", "wrong"], ["Enterprise", "wrong"]],
     pictureSource: '#',
-    correctAnswerText: '.'
+    correctAnswerText: 'Launched on September 5, 1977, Voyager 1 is over 21 billion kilometers from Earth, and has been operational for over 40 years.'
 };
 
 var question5 = {
@@ -41,7 +41,7 @@ var question5 = {
     questionText: "These neutron stars rotate rapidly and send out pulses of energy on regular intervals, sometimes over 1000 times per second. What are they called?",
     answers: [["Pulsars", "correct"], ["Black Holes", "wrong"], ["Red Dwarfs", "wrong"], ["Tyson Stars", "wrong"]],
     pictureSource: '#',
-    correctAnswerText: '.'
+    correctAnswerText: 'Some pulsars rival atomic clocks in their time keeping accuracy.'
 };
 
 var question6 = {
@@ -54,13 +54,38 @@ var question6 = {
 
 var question7 = {
     questionNumber: 7,
-    questionText: "Launched in 1990, this space telescope has led to the discovery of many new interesting facts, and has help provide justification for some of physics' leading theories?",
-    answers: [["Hubble", "correct"], ["Andromeda", "wrong"], ["Pulsar", "wrong"], ["Orion", "wrong"]],
+    questionText: "What is the name of the Galaxy closest to the Milky Way?",
+    answers: [["Andromeda", "correct"], ["Tatooine", "wrong"], ["Nebula", "wrong"], ["Thanos", "wrong"]],
     pictureSource: '#',
-    correctAnswerText: '.'
+    correctAnswerText: 'At 2.5 million light years from earth, Andromeda is the closest neighboring galaxy.'
 };
 
-var questionArray = [question1, question2, question3, question4, question5, question6, question7];
+var question8 = {
+    questionNumber: 8,
+    questionText: "As of June 2018, currently the largest man-made object in orbit, this outpost allows astronauts to stay in space for long duration experiments?",
+    answers: [["International Space Station", "correct"], ["M.I.R.", "wrong"], ["Sky Lab", "wrong"], ["Discovery", "wrong"]],
+    pictureSource: '#',
+    correctAnswerText: "The International Space Station had it's first components launched in 1998, and is expected to operate until 2028."
+};
+
+var question9 = {
+    questionNumber: 9,
+    questionText: "The Falcon 9 rocket from this company is dramatically reducing the cost to get to orbit through reusability?",
+    answers: [["SpaceX", "correct"], ["Boeing", "wrong"], ["Sky Flight", "wrong"], ["Blue Origin", "wrong"]],
+    pictureSource: '#',
+    correctAnswerText: "SpaceX is currently leading the way in reusable rocket technology, after successfully landing the Falcon 9 first stage 25 times as of June 2018."
+};
+
+var question10 = {
+    questionNumber: 10,
+    questionText: "What is the name of the planet that passes closest to Earth?",
+    answers: [["Venus", "correct"], ["Mars", "wrong"], ["Mercury", "wrong"], ["Jupiter", "wrong"]],
+    pictureSource: '#',
+    correctAnswerText: "Venus is approximately 41 million kilometers from earth at it's closest approach."
+};
+
+var questionArray = [question1, question2, question3] //testing array
+//var questionArray = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
 //Game stats and progression variables
 var questionCounter = 0;
@@ -91,6 +116,7 @@ $(document).ready(function () {
 
     //Correct answer choice
     $('#answer-list').on('click', '.correct', function () {
+        $('#timer').text('Correct!');
         clearInterval(intervalId);
         $('.questions').hide()
         $('#question-text').text(questionArray[questionCounter].correctAnswerText);
@@ -111,6 +137,7 @@ $(document).ready(function () {
 
     //Wrong answer choice
     $('#answer-list').on('click', '.wrong', function () {
+        $('#timer').text('Incorrect!');
         clearInterval(intervalId);
         $('.questions').hide()
         $('#question-text').text(questionArray[questionCounter].correctAnswerText);
@@ -172,7 +199,7 @@ $(document).ready(function () {
 
             //======================================================================================
             //Create an array of answers to be shuffled
-            var shuffleArray = questionArray[questionCounter].answers;
+            var shuffleArray = questionArray[questionCounter].answers.slice(0);
             //while loop to stop answer creation once all answers are created
             while (shuffleArray.length > 0) {
 
@@ -187,7 +214,8 @@ $(document).ready(function () {
                 newAnswer.addClass('answer')
                 $('#answer-list').append(newAnswer);
                 shuffleArray.splice(shuffleIndex, 1);
-                console.log('length' + shuffleArray.length)
+                
+                
             }; //End while loop for answer creation
             //============================================================================================
 
@@ -226,6 +254,7 @@ $(document).ready(function () {
 
             //hide appropriate items and then show correct answer
             $('.questions').hide()
+            $('#timer').text('You didnt choose an answer in time!');
             $('#question-text').text(questionArray[questionCounter].correctAnswerText);
             $('.wrong').css('visibility', 'hidden');
             $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
