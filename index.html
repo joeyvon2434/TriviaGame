@@ -24,12 +24,13 @@
 
             <!--Start Screen Items to fade out on beginning of game-->
             <h2 class="start-screen">Welcome to Space Trivia!</h2>
+            <h3 class="start-screen">Rules!</h3>
             <ul class="start-screen">
                 <li>10 questions</li>
                 <li>30 seconds per question</li>
                 <li>Pick the correct answer</li>
                 <li>There will only be one correct answer</li>
-                <li>Click begin when you are ready!</li>
+                <li id='last-item'>Click begin when you are ready!</li>
             </ul>
             
 
@@ -38,8 +39,7 @@
 
             <!--Questions section of game to fade in when game begins and fade out after all question asked-->
             <div id="timer" class="questions">30</div>
-            <p id="question-text" class="questions">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas ligula vitae lacus egestas feugiat. Proin
-                et ante vulputate, imperdiet arcu at, congue ante. Orci varius natoque penatibus et magnis</p>
+            <p id="question-text" class="questions"></p>
             <div id="answer-list" class="questions">
 
                 <!--Use javascript to create the divs with answers so the order can be random-->

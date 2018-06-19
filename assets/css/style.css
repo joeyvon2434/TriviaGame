@@ -1,5 +1,6 @@
 *, h1, h2, h3, p, div, button {
-    font-family: 'Montserrat', arial, sans-serif
+    font-family: 'Montserrat', arial, sans-serif;
+    color: white;
 }
 
 body {
@@ -21,12 +22,12 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    padding: 25px 15px 15px 15px;
+    padding: 25px 15px 10px 15px;
     font-size: 60px;
     font-weight: bold;
     color: transparent;
     background: rgb(185, 185, 21);
-    background: linear-gradient(yellow, rgb(252, 252, 77));
+    background: linear-gradient(rgb(255, 255, 0), rgb(252, 252, 77));
     -webkit-background-clip: text;
 
 
@@ -37,12 +38,57 @@ body {
     position: relative;
     height: 70vh;
     width: 70%;
-    margin: 30px auto 20px auto;
+    margin: 15px auto 35px auto;
     border: 1px solid rgb(87, 86, 86);
+    background: rgb(66, 66, 66, 0.5);
+}
+
+.start-screen {
+    margin: 20px auto;
+    text-align: center;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+li {
+    margin: 20px auto;
+    list-style-type: square;
+    list-style-position: inside;
+}
+
+#last-item {
+    margin-bottom: 40px;
+}
+
+button {
+    display: block;
+    position: relative;
+    width: 20%;
+    height: 7vh;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    border: 2px solid rgb(2, 2, 97);
+    background: rgb(58, 118, 207);
 }
 
 .questions{
     display: none;
+    margin-left: auto;
+    margin-right: right;
+    text-align: center;
+}
+
+#timer {
+    margin: 20px auto;
+    font-size: 30px;
 }
 
 #answer-list {
