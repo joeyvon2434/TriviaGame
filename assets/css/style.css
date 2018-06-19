@@ -42,6 +42,10 @@
     border: 1px solid black;
 }
 
+.end-game {
+    display: none;
+}
+
 #answer-image {
     position: relative;
     display: none;

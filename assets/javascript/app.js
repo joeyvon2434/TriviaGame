@@ -28,7 +28,39 @@ var question3 = {
     correctAnswerText: 'Yuri Gegarin was the first human to journey to space on April 12, 1961 aboard Vostok 1.'
 };
 
-var questionArray = [question1, question2, question3];
+var question4 = {
+    questionNumber: 4,
+    questionText: "What is the name of the man-made spacecraft currently farthest from the Earth?",
+    answers: [["Voyager 1", "correct"], ["Voyager 2", "wrong"], ["Cassini", "wrong"], ["Enterprise", "wrong"]],
+    pictureSource: '#',
+    correctAnswerText: '.'
+};
+
+var question5 = {
+    questionNumber: 5,
+    questionText: "These neutron stars rotate rapidly and send out pulses of energy on regular intervals, sometimes over 1000 times per second. What are they called?",
+    answers: [["Pulsars", "correct"], ["Black Holes", "wrong"], ["Red Dwarfs", "wrong"], ["Tyson Stars", "wrong"]],
+    pictureSource: '#',
+    correctAnswerText: '.'
+};
+
+var question6 = {
+    questionNumber: 6,
+    questionText: "Launched in 1990, this space telescope has led to the discovery of many new interesting facts, and has help provide justification for some of physics' leading theories?",
+    answers: [["Hubble", "correct"], ["Andromeda", "wrong"], ["Pulsar", "wrong"], ["Orion", "wrong"]],
+    pictureSource: '#',
+    correctAnswerText: 'The Hubble Space Telescope has a mirror 2.4 meters in diameter, and has helped scientists accurately measure the expansion of the universe.'
+};
+
+var question7 = {
+    questionNumber: 7,
+    questionText: "Launched in 1990, this space telescope has led to the discovery of many new interesting facts, and has help provide justification for some of physics' leading theories?",
+    answers: [["Hubble", "correct"], ["Andromeda", "wrong"], ["Pulsar", "wrong"], ["Orion", "wrong"]],
+    pictureSource: '#',
+    correctAnswerText: '.'
+};
+
+var questionArray = [question1, question2, question3, question4, question5, question6, question7];
 
 //Game stats and progression variables
 var questionCounter = 0;
@@ -60,12 +92,12 @@ $(document).ready(function () {
     //Correct answer choice
     $('#answer-list').on('click', '.correct', function () {
         clearInterval(intervalId);
-        $('.questions').fadeOut(function () {
-            $('#question-text').text(questionArray[questionCounter].correctAnswerText);
-            $('.wrong').css('visibility', 'hidden');
-            $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
-            correctChoices = correctChoices + 1;
-        }).fadeIn(500); //end fade out function to ensure proper order of execution
+        $('.questions').hide()
+        $('#question-text').text(questionArray[questionCounter].correctAnswerText);
+        $('.wrong').css('visibility', 'hidden');
+        $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
+        correctChoices = correctChoices + 1;
+        $('.questions').fadeIn(500); //
         $('#answer-image').delay(500).fadeIn(500);
 
         //call function to transition to next question
@@ -80,12 +112,12 @@ $(document).ready(function () {
     //Wrong answer choice
     $('#answer-list').on('click', '.wrong', function () {
         clearInterval(intervalId);
-        $('.questions').fadeOut(function () {
-            $('#question-text').text(questionArray[questionCounter].correctAnswerText);
-            $('.wrong').css('visibility', 'hidden');
-            $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
-            wrongChoices = wrongChoices + 1;
-        }).fadeIn(500); //end fade out function to ensure proper order of execution
+        $('.questions').hide()
+        $('#question-text').text(questionArray[questionCounter].correctAnswerText);
+        $('.wrong').css('visibility', 'hidden');
+        $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
+        wrongChoices = wrongChoices + 1;
+        $('.questions').fadeIn(500);
         $('#answer-image').delay(500).fadeIn(500);
 
         //call function to transition to next question
@@ -95,8 +127,20 @@ $(document).ready(function () {
     }); //end click function for wrong answers
 
 
+//Time Running Out is included in the countDown function below
 
-    //Time Rnning Out is included in the countDown function below
+
+    //New Game Button
+    //===================================
+    $('#new-game').on('click', function() {
+        $('.end-game').fadeOut(500);
+        $('.start-screen').fadeIn(500);
+        questionCounter = 0;
+        correctChoices = 0;
+        wrongChoices = 0;
+        intervalId;
+        time = 30;
+    });
 
 
     //===================================
@@ -112,51 +156,59 @@ $(document).ready(function () {
     function nextQuestion() {
         //set question text
         clearInterval(intervalId);
-        $('#question-text').text(questionArray[questionCounter].questionText);
 
-        //set answers ==================
+        //Check if the last question has passed
 
-
-
-        //======================================================================================
-        //Create an array of answers to be shuffled
-        var shuffleArray = questionArray[questionCounter].answers;
-    //while loop to stop answer creation once all answers are created
-        while (shuffleArray.length > 0) {
-
-    //Pull first item from shuffled array
-            var shuffleIndex = Math.floor(Math.random() * shuffleArray.length);
-            var answerCreation = shuffleArray[shuffleIndex];
-
-    //Create a list item for the first answer
-            var newAnswer = $("<div>");
-            newAnswer.text(answerCreation[0]);
-            newAnswer.addClass(answerCreation[1]);
-            newAnswer.addClass('answer')
-            $('#answer-list').append(newAnswer);
-            shuffleArray.splice(shuffleIndex, 1);
-            console.log('length' + shuffleArray.length)
-        }; //End while loop for answer creation
-    //============================================================================================
-
-///===========TESTING ANSWER LOOP, COMMENTED OUT FOR RANDOMIZED QUESTION ORDER ABOVE ===================
-    // for (i=0; i < 4; i++) {
-    //     var newAnswerA = $('<div>');
-    //     newAnswerA.text(questionArray[questionCounter].answers[i][0]);
-    //     console.log(questionArray[questionCounter].answers[i][0]);
-    //     newAnswerA.addClass(questionArray[questionCounter].answers[i][1]);
-    //     newAnswerA.addClass('answer');
-    //     $('#answer-list').append(newAnswerA);
-    // }
+        if (questionCounter == questionArray.length) {
+            endGame();
+        } else {
 
 
-    //Show question and answers
-        $(".questions").delay(500).fadeIn(500);
-        $('.answer').delay(500).fadeIn(500);
+            $('#question-text').text(questionArray[questionCounter].questionText);
 
-    //start timer
-        intervalId = setInterval(countDown, 1000);
+            //set answers ==================
 
+
+
+            //======================================================================================
+            //Create an array of answers to be shuffled
+            var shuffleArray = questionArray[questionCounter].answers;
+            //while loop to stop answer creation once all answers are created
+            while (shuffleArray.length > 0) {
+
+                //Pull first item from shuffled array
+                var shuffleIndex = Math.floor(Math.random() * shuffleArray.length);
+                var answerCreation = shuffleArray[shuffleIndex];
+
+                //Create a list item for the first answer
+                var newAnswer = $("<div>");
+                newAnswer.text(answerCreation[0]);
+                newAnswer.addClass(answerCreation[1]);
+                newAnswer.addClass('answer')
+                $('#answer-list').append(newAnswer);
+                shuffleArray.splice(shuffleIndex, 1);
+                console.log('length' + shuffleArray.length)
+            }; //End while loop for answer creation
+            //============================================================================================
+
+            ///===========TESTING ANSWER LOOP, COMMENTED OUT FOR RANDOMIZED QUESTION ORDER ABOVE ===================
+            // for (i=0; i < 4; i++) {
+            //     var newAnswerA = $('<div>');
+            //     newAnswerA.text(questionArray[questionCounter].answers[i][0]);
+            //     console.log(questionArray[questionCounter].answers[i][0]);
+            //     newAnswerA.addClass(questionArray[questionCounter].answers[i][1]);
+            //     newAnswerA.addClass('answer');
+            //     $('#answer-list').append(newAnswerA);
+            // }
+
+
+            //Show question and answers
+            $(".questions").delay(500).fadeIn(500);
+            $('.answer').delay(500).fadeIn(500);
+
+            //start timer
+            intervalId = setInterval(countDown, 1000);
+        }
     }; //End next question function
 
 
@@ -173,12 +225,12 @@ $(document).ready(function () {
             clearInterval(intervalId);
 
             //hide appropriate items and then show correct answer
-            $('.questions').fadeOut(function () {
-                $('#question-text').text(questionArray[questionCounter].correctAnswerText);
-                $('.wrong').css('visibility', 'hidden');
-                $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
-                wrongChoices = wrongChoices + 1;
-            }).fadeIn(500); //end fade out function to ensure proper order of execution
+            $('.questions').hide()
+            $('#question-text').text(questionArray[questionCounter].correctAnswerText);
+            $('.wrong').css('visibility', 'hidden');
+            $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
+            wrongChoices = wrongChoices + 1;
+            $('.questions').fadeIn(500);
             $('#answer-image').delay(500).fadeIn(500);
 
             //Call transitionCountDown function
@@ -189,6 +241,8 @@ $(document).ready(function () {
         }//end if statement for no time left
     }// end countDown timer
 
+    //Transition Timer
+    //===========================
     function transitionCountDown() {
         console.log(time);
         time = time - 1;
@@ -198,15 +252,24 @@ $(document).ready(function () {
             time = 30;
             questionCounter = questionCounter + 1;
             $('#answer-image').fadeOut();
-            $('.questions').fadeOut();//function () { // this function set up is causing the problem. this part gets called 3 times
-                $('#answer-list').text('');
-                $('.wrong').css('visibility', 'visible');
-                nextQuestion();
-                console.log('error test');
+            $('.questions').fadeOut(500);//function () { // this function set up is causing the problem. this part gets called 3 times
+            $('#answer-list').text('');
+            $('.wrong').css('visibility', 'visible');
+            nextQuestion();
+            console.log('error test');
             //});                       //this is the end of the function set up causing the problem
-            
+
         };
-    };
+    };//End transition timer
+
+
+    //End of Game Function
+
+    function endGame() {
+        $('#correct-answers').text('Correct: ' + correctChoices);
+        $('#wrong-answers').text('Incorrect: ' + wrongChoices);
+        $('.end-game').fadeIn(500);
+    }
 
 
 }); //document.ready end
