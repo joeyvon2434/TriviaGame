@@ -20,7 +20,15 @@ var question2 = {
     correctAnswerText: 'Columbia was the first Space Shuttle to lift off from Kennedy Space Center and achieve orbit on April 12, 1981. Previous test flights of the orbiter, Enterprise, were launched from a modified Boeing 747, and was used exlcusively for unpowered atmospheric test flights.'
 };
 
-var questionArray = [question1, question2];
+var question3 = {
+    questionNumber: 3,
+    questionText: "The first person to journey into space was a Russian man in 1961. What was his name?",
+    answers: [["Yuri Gagarin", "correct"], ["Yakov Smirnoff", "wrong"], ["Fyodor Dostoyevsky", "wrong"], ["Pyotr Tchaikovsky", "wrong"]],
+    pictureSource: '#',
+    correctAnswerText: 'Yuri Gegarin was the first human to journey to space on April 12, 1961 aboard Vostok 1.'
+};
+
+var questionArray = [question1, question2, question3];
 
 //Game stats and progression variables
 var questionCounter = 0;
@@ -111,35 +119,35 @@ $(document).ready(function () {
 
 
         //======================================================================================
-    //     //Create an array of answers to be shuffled
-    //     var shuffleArray = questionArray[questionCounter].answers;
-    // //while loop to stop answer creation once all answers are created
-    //     while (shuffleArray.length > 0) {
+        //Create an array of answers to be shuffled
+        var shuffleArray = questionArray[questionCounter].answers;
+    //while loop to stop answer creation once all answers are created
+        while (shuffleArray.length > 0) {
 
-    // //Pull first item from shuffled array
-    //         var shuffleIndex = Math.floor(Math.random() * shuffleArray.length);
-    //         var answerCreation = shuffleArray[shuffleIndex];
+    //Pull first item from shuffled array
+            var shuffleIndex = Math.floor(Math.random() * shuffleArray.length);
+            var answerCreation = shuffleArray[shuffleIndex];
 
-    // //Create a list item for the first answer
-    //         var newAnswer = $("<div>");
-    //         newAnswer.text(answerCreation[0]);
-    //         newAnswer.addClass(answerCreation[1]);
-    //         newAnswer.addClass('answer')
-    //         $('#answer-list').append(newAnswer);
-    //         shuffleArray.splice(shuffleIndex, 1);
-    //         console.log('length' + shuffleArray.length)
-    //     }; //End while loop for answer creation
+    //Create a list item for the first answer
+            var newAnswer = $("<div>");
+            newAnswer.text(answerCreation[0]);
+            newAnswer.addClass(answerCreation[1]);
+            newAnswer.addClass('answer')
+            $('#answer-list').append(newAnswer);
+            shuffleArray.splice(shuffleIndex, 1);
+            console.log('length' + shuffleArray.length)
+        }; //End while loop for answer creation
     //============================================================================================
 
-
-    for (i=0; i < 4; i++) {
-        var newAnswerA = $('<div>');
-        newAnswerA.text(questionArray[questionCounter].answers[i][0]);
-        console.log(questionArray[questionCounter].answers[i][0]);
-        newAnswerA.addClass(questionArray[questionCounter].answers[i][1]);
-        newAnswerA.addClass('answer');
-        $('#answer-list').append(newAnswerA);
-    }
+///===========TESTING ANSWER LOOP, COMMENTED OUT FOR RANDOMIZED QUESTION ORDER ABOVE ===================
+    // for (i=0; i < 4; i++) {
+    //     var newAnswerA = $('<div>');
+    //     newAnswerA.text(questionArray[questionCounter].answers[i][0]);
+    //     console.log(questionArray[questionCounter].answers[i][0]);
+    //     newAnswerA.addClass(questionArray[questionCounter].answers[i][1]);
+    //     newAnswerA.addClass('answer');
+    //     $('#answer-list').append(newAnswerA);
+    // }
 
 
     //Show question and answers
@@ -182,18 +190,21 @@ $(document).ready(function () {
     }// end countDown timer
 
     function transitionCountDown() {
+        console.log(time);
         time = time - 1;
+
         if (time == 0) {
             clearInterval(intervalId);
             time = 30;
             questionCounter = questionCounter + 1;
             $('#answer-image').fadeOut();
-            $('.questions').fadeOut(function () {
+            $('.questions').fadeOut();//function () { // this function set up is causing the problem. this part gets called 3 times
                 $('#answer-list').text('');
                 $('.wrong').css('visibility', 'visible');
                 nextQuestion();
-            });
-
+                console.log('error test');
+            //});                       //this is the end of the function set up causing the problem
+            
         };
     };
 
