@@ -10,15 +10,15 @@ var question1 = {
     answers: [["1969", "correct"], ["1983", "wrong"], ["1965", "wrong"], ["1972", "wrong"]],
     pictureSource: 'assets/images/kitten.png',
     correctAnswerText: 'Neil Armstrong fisrt set foot on the moon in 1969.'
-}
+};
 
 var question2 = {
     questionNumber: 2,
-    questionText: "On April 12, 1981, the first Space Shuttle lefted off from Kennedy Space Center and entered orbit around the Earth. What was the name of this shuttle?",
+    questionText: "On April 12, 1981, the first Space Shuttle lifted off from Kennedy Space Center and entered orbit around the Earth. What was the name of this shuttle?",
     answers: [["Columbia", "correct"], ["Challenger", "wrong"], ["Discovery", "wrong"], ["Endeavour", "wrong"]],
-    pictureSource: 'xxxx',
+    pictureSource: '#',
     correctAnswerText: 'Columbia was the first Space Shuttle to lift off from Kennedy Space Center and achieve orbit on April 12, 1981. Previous test flights of the orbiter, Enterprise, were launched from a modified Boeing 747, and was used exlcusively for unpowered atmospheric test flights.'
-}
+};
 
 var questionArray = [question1, question2];
 
@@ -29,8 +29,8 @@ var wrongChoices = 0;
 var intervalId;
 var time = 30;
 
-$(document).ready(function () {
 
+$(document).ready(function () {
     //===========================    
     //Game Progression Functions
     //===========================
@@ -45,71 +45,113 @@ $(document).ready(function () {
 
 
     //Function to check for timeout or answer correctness
-    //START HERE NEXT TIME
     //=========================================================
+
+
 
     //Correct answer choice
     $('#answer-list').on('click', '.correct', function () {
         clearInterval(intervalId);
         $('.questions').fadeOut(function () {
-
             $('#question-text').text(questionArray[questionCounter].correctAnswerText);
             $('.wrong').css('visibility', 'hidden');
             $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
-            
-
-            console.log(time);
             correctChoices = correctChoices + 1;
         }).fadeIn(500); //end fade out function to ensure proper order of execution
         $('#answer-image').delay(500).fadeIn(500);
-    }); //end click function for correct
+
+        //call function to transition to next question
+        time = 10;
+        intervalId = setInterval(transitionCountDown, 1000);
+
+    }); //end click function for correct answers
 
 
+
+
+    //Wrong answer choice
+    $('#answer-list').on('click', '.wrong', function () {
+        clearInterval(intervalId);
+        $('.questions').fadeOut(function () {
+            $('#question-text').text(questionArray[questionCounter].correctAnswerText);
+            $('.wrong').css('visibility', 'hidden');
+            $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
+            wrongChoices = wrongChoices + 1;
+        }).fadeIn(500); //end fade out function to ensure proper order of execution
+        $('#answer-image').delay(500).fadeIn(500);
+
+        //call function to transition to next question
+        time = 10;
+        intervalId = setInterval(transitionCountDown, 1000);
+
+    }); //end click function for wrong answers
+
+
+
+    //Time Rnning Out is included in the countDown function below
 
 
     //===================================
     //Called Functions (Utility Functions)
     //===================================
 
+
+
+
+
     //Function that prepares the next question
     //=======================================
     function nextQuestion() {
         //set question text
+        clearInterval(intervalId);
         $('#question-text').text(questionArray[questionCounter].questionText);
 
         //set answers ==================
 
-        //Create an array of answers to be shuffled
-        var shuffleArray = [];
-        shuffleArray = questionArray[questionCounter].answers;
 
 
-        //while loop to stop answer creation once all answers are created
-        while (shuffleArray.length > 0) {
+        //======================================================================================
+    //     //Create an array of answers to be shuffled
+    //     var shuffleArray = questionArray[questionCounter].answers;
+    // //while loop to stop answer creation once all answers are created
+    //     while (shuffleArray.length > 0) {
 
-            //Pull first item from shuffled array
-            var shuffleIndex = Math.floor(Math.random() * shuffleArray.length);
-            var answerCreation = shuffleArray[shuffleIndex];
+    // //Pull first item from shuffled array
+    //         var shuffleIndex = Math.floor(Math.random() * shuffleArray.length);
+    //         var answerCreation = shuffleArray[shuffleIndex];
+
+    // //Create a list item for the first answer
+    //         var newAnswer = $("<div>");
+    //         newAnswer.text(answerCreation[0]);
+    //         newAnswer.addClass(answerCreation[1]);
+    //         newAnswer.addClass('answer')
+    //         $('#answer-list').append(newAnswer);
+    //         shuffleArray.splice(shuffleIndex, 1);
+    //         console.log('length' + shuffleArray.length)
+    //     }; //End while loop for answer creation
+    //============================================================================================
 
 
-            //Create a list item for the first answer
-            console.log('index' + shuffleIndex);
-            var newAnswer = $("<div>");
-            newAnswer.text(answerCreation[0]);
-            newAnswer.addClass(answerCreation[1]);
-            newAnswer.addClass('answer')
-            $('#answer-list').append(newAnswer);
-            shuffleArray.splice(shuffleIndex, 1);
+    for (i=0; i < 4; i++) {
+        var newAnswerA = $('<div>');
+        newAnswerA.text(questionArray[questionCounter].answers[i][0]);
+        console.log(questionArray[questionCounter].answers[i][0]);
+        newAnswerA.addClass(questionArray[questionCounter].answers[i][1]);
+        newAnswerA.addClass('answer');
+        $('#answer-list').append(newAnswerA);
+    }
 
-        }; //End while loop for answer creation
 
-        //Show question and answers
-        $(".questions").delay(500).fadeIn(500);//Likely change this to a function call that works for all question changes
+    //Show question and answers
+        $(".questions").delay(500).fadeIn(500);
+        $('.answer').delay(500).fadeIn(500);
 
-        //start timer
+    //start timer
         intervalId = setInterval(countDown, 1000);
 
     }; //End next question function
+
+
 
 
     //Count Down Function for timer
@@ -117,7 +159,43 @@ $(document).ready(function () {
     function countDown() {
         time = time - 1;
         $('#timer').text(time);
-    }
+
+        if (time == 0) {
+            //end timer when it reaches 0
+            clearInterval(intervalId);
+
+            //hide appropriate items and then show correct answer
+            $('.questions').fadeOut(function () {
+                $('#question-text').text(questionArray[questionCounter].correctAnswerText);
+                $('.wrong').css('visibility', 'hidden');
+                $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
+                wrongChoices = wrongChoices + 1;
+            }).fadeIn(500); //end fade out function to ensure proper order of execution
+            $('#answer-image').delay(500).fadeIn(500);
+
+            //Call transitionCountDown function
+            time = 10;
+            intervalId = setInterval(transitionCountDown, 1000);
+
+
+        }//end if statement for no time left
+    }// end countDown timer
+
+    function transitionCountDown() {
+        time = time - 1;
+        if (time == 0) {
+            clearInterval(intervalId);
+            time = 30;
+            questionCounter = questionCounter + 1;
+            $('#answer-image').fadeOut();
+            $('.questions').fadeOut(function () {
+                $('#answer-list').text('');
+                $('.wrong').css('visibility', 'visible');
+                nextQuestion();
+            });
+
+        };
+    };
 
 
 }); //document.ready end

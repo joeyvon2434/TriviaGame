@@ -30,6 +30,10 @@
     display: none;
 }
 
+#answer-list {
+    border: 1px solid black;
+}
+
 .answer { /*this class is for the answers created in jquery*/
     width: 25%;
     margin: 10px auto;
