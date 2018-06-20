@@ -84,8 +84,8 @@ var question10 = {
     correctAnswerText: "Venus is approximately 41 million kilometers from earth at it's closest approach."
 };
 
-var questionArray = [question1, question2, question3] //testing array
-//var questionArray = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
+//var questionArray = [question1, question2, question3] //testing array
+var questionArray = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
 //Game stats and progression variables
 var questionCounter = 0;
@@ -96,6 +96,8 @@ var time = 30;
 
 
 $(document).ready(function () {
+    $('#answer-image').hide();
+
     //===========================    
     //Game Progression Functions
     //===========================
@@ -117,6 +119,7 @@ $(document).ready(function () {
     //Correct answer choice
     $('#answer-list').on('click', '.correct', function () {
         $('#timer').text('Correct!');
+        $('#timer').css('color', 'green');
         clearInterval(intervalId);
         $('.questions').hide()
         $('#question-text').text(questionArray[questionCounter].correctAnswerText);
@@ -138,6 +141,7 @@ $(document).ready(function () {
     //Wrong answer choice
     $('#answer-list').on('click', '.wrong', function () {
         $('#timer').text('Incorrect!');
+        $('#timer').css('color', 'red');
         clearInterval(intervalId);
         $('.questions').hide()
         $('#question-text').text(questionArray[questionCounter].correctAnswerText);
@@ -235,6 +239,7 @@ $(document).ready(function () {
             $('.answer').delay(500).fadeIn(500);
 
             //start timer
+            $('#timer').css('color', 'white');
             intervalId = setInterval(countDown, 1000);
         }
     }; //End next question function
@@ -281,12 +286,14 @@ $(document).ready(function () {
             time = 30;
             questionCounter = questionCounter + 1;
             $('#answer-image').fadeOut();
-            $('.questions').fadeOut(500);//function () { // this function set up is causing the problem. this part gets called 3 times
+
+            // Try .promises and .done to stop the flash of new info.
+            $('.questions').fadeOut().promise().done(function() {//function () { // this function set up is causing the problem. this part gets called 3 times
             $('#answer-list').text('');
             $('.wrong').css('visibility', 'visible');
             nextQuestion();
             console.log('error test');
-            //});                       //this is the end of the function set up causing the problem
+            });                       //this is the end of the function set up causing the problem
 
         };
     };//End transition timer
@@ -302,3 +309,13 @@ $(document).ready(function () {
 
 
 }); //document.ready end
+
+
+
+
+
+
+
+
+//========================
+//========================
