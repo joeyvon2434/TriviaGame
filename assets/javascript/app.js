@@ -268,6 +268,8 @@ $(document).ready(function () {
     function transitionCountDown() {
         console.log(time);
         time = time - 1;
+        $(".correct").css("pointer-events", "none");
+
 
         if (time == 0) {
             clearInterval(intervalId);
@@ -280,7 +282,8 @@ $(document).ready(function () {
                 $('#answer-list').text('');
                 $('.wrong').css('visibility', 'visible');
                 nextQuestion();
-                console.log('error test');
+                $(".correct").css("pointer-events", "auto");
+
             });
 
         };
