@@ -84,8 +84,8 @@ var question10 = {
     correctAnswerText: "Venus is approximately 41 million kilometers from earth at it's closest approach."
 };
 
-//var questionArray = [question1, question2, question3] //testing array
-var questionArray = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
+var questionArray = [question1, question2, question3] //testing array
+//var questionArray = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
 //Game stats and progression variables
 var questionCounter = 0;
