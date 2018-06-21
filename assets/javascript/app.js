@@ -247,7 +247,7 @@ $(document).ready(function () {
 
             //hide appropriate items and then show correct answer
             $('.questions').hide()
-            $('#timer').text('You didnt choose an answer in time!');
+            $('#timer').text("You didn't choose an answer in time!");
             $('#question-text').text(questionArray[questionCounter].correctAnswerText);
             $('.wrong').hide();
             $('#answer-image').attr('src', questionArray[questionCounter].pictureSource);
