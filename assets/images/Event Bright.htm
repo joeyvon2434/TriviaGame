@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- saved from url=(0076)file:///Users/joeyvon2434/coding_bootcamp/Projects/Group-Project/index.html? -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event Bright</title>
+
+
+    <link rel="stylesheet" href="./Event Bright_files/font-awesome.min.css">
+    <link rel="stylesheet" href="./Event Bright_files/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./Event Bright_files/style.css">
+</head>
+
+<body>
+
+
+    <div class="main-content" style="border: 1px solid orange;">
+        <div class="jumbotron jumbotron-fluid" style="border: 1px solid blue;">
+            <div class="container1" style="border: 1px solid green;">
+                <h1 class="display-4" style="border: 1px solid red;">Bright Events</h1>
+                <p class="lead" style="border: 1px solid red;">
+                    <u>Local Weather for Local Events!</u>
+                </p>
+            </div>
+            <div class="search-function" style="border: 1px solid yellow;">
+                <form class="event-search">
+                    <input id="keyword-input" type="text" placeholder="Search an event..." name="search">
+                    <button id="search-button" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <!-- Date input -->
+                    <br>
+                    <input class="fa fa-search" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
+                    <br>
+                    <label class="control-label" for="date">Date (optional)</label>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="database-output" style="border: 1px solid red;">
+
+    </div>
+
+
+
+    <form class="welcome-form" style="display: none;">
+        <div class="form-group welcome">
+            <label class="top-item" for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group welcome">
+            <label for="exampleInputName1">Name</label>
+            <input type="name" class="form-control" id="name-input" placeholder="Name">
+        </div>
+
+        <div class="form-group welcome">
+            <label for="exampleInputFavoriteTeam1">Favorite Team</label>
+            <input type="favoriteTeam" class="form-control" id="favorite-team" placeholder="FavoriteTeam">
+        </div>
+        <button id="welcome-button" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue">
+
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Bright Events</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+
+
+    <script src="./Event Bright_files/moment.min.js"></script>
+
+    <script src="./Event Bright_files/firebase.js"></script>
+
+    <script src="./Event Bright_files/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="./Event Bright_files/app.js"></script>
+
+
+
+
+
+</body></html>
